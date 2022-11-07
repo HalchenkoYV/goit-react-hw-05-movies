@@ -1,15 +1,15 @@
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { Container, Link, CardWrapper, ProductName } from "./TrendingMovies.styled";
+import { Link,useLocation } from "react-router-dom";
+import { Container, CardWrapper, ProductName } from "./TrendingMovies.styled";
 import useDataApi from '../hooks/useDataApi ';
 
 export const TrendingMovies = () => {
-    const [{ dataOnPages, isLoading, isError, loadMore, curPage }, setTargeta, setDataOnPages,] = useDataApi();
-    
+    const [{ dataOnPages}, setTargeta,] = useDataApi();
+    const location = useLocation();
 
-    // useEffect(() => {
-    //     // console.log(dataOnPages)
-    // },[dataOnPages]);
+    useEffect(() => {
+      setTargeta('trendforrequest')
+    },[dataOnPages, setTargeta]);
 
 
 
@@ -17,20 +17,18 @@ export const TrendingMovies = () => {
   return (
       <Container>
           
-          <p>Additional Information</p>
-            {/* <Cast />
-              <Reviews/> */}
+          <p>Trending movies</p>
           <ul>
           {dataOnPages.map(({ title, id, name }) => {
               return (
-                
+                  
                   <CardWrapper key={id}>
-                        <Link to={`${id}`}>
+                        <Link to={`/movies/${id}`} state={{ from: location }}>
                             <ProductName>{title?title:name}</ProductName>
                         </Link>
                   </CardWrapper>
                 )
-          })};
+          })}
               </ul>
       
     </Container>

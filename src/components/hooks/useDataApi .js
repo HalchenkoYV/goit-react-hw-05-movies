@@ -1,44 +1,60 @@
-import {  useState, useEffect, useRef, } from 'react';
+import {  useState, useEffect, } from 'react';
 import getPics from 'components/api-service(only-get)/api-service';
 
 
-const  useDataApi = () => {
-  const [target, setTargeta] = useState('');
+const  useDataApi = (forTarget='',forId='') => {
+  const [target, setTarget] = useState(forTarget);
   const [curPage, setCurPage] = useState(1);
   const [dataOnPages, setDataOnPages] = useState([]);
-  const [id, setId] = useState('');
+  const [id, setId] = useState(forId);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
-  const once = useRef(false);
 
- 
-    useEffect(() => {
-      if (once.current) {
-        
+
+
+  useEffect(() => {
+
+      if (!target) {
             return;
-      };
-      once.current = true;
-      
-
+    };
         const fetchData =  () => {
           setIsError(false);
           setIsLoading(true);
           setLoadMore(false);
-          // console.log(0)
-          setTimeout(async() => {
+
+          setTimeout(async () => {
+             console.log('awaitt', `id${id}`,`target${target}`);
             try {
-              // console.log(0)
-               if (id) {
-                 const { data} = await getPics.fetchPics('', id);
-                 setDataOnPages(data);
+              if (target==='castforrequest') {
+                 const { data} = await getPics.fetchPics(target, id);
+                setDataOnPages(data);
+                return
               };
-              if (!target) {
-                console.log(1)
+              if (target==='reviewsforrequest') {
+                 const { data} = await getPics.fetchPics(target, id);
+                setDataOnPages(data);
+                return
+              };
+              if (target==='trendforrequest') {
                   const { data:{ results, page, total_pages }} = await getPics.fetchPics(target,'',curPage);
                   setDataOnPages(prevData => [...prevData, ...results]);
-                  page >= total_pages ? setLoadMore(true) : setLoadMore(false);
+                page >= total_pages ? setLoadMore(true) : setLoadMore(false);
+                setIsLoading(false);
+                return
               };
+               if (target==='byId') {
+                 const { data} = await getPics.fetchPics(target, id);
+                 setDataOnPages(data);
+                 return
+              };
+                if (target) {
+                 const { data:{ results, page, total_pages }} = await getPics.fetchPics(target);
+                 setDataOnPages(prevData => [...prevData, ...results]);
+                  page >= total_pages ? setLoadMore(true) : setLoadMore(false);
+                  
+              };
+              
              }
              catch (error) {setIsError(true);};
  
@@ -50,7 +66,7 @@ const  useDataApi = () => {
         
   }, [curPage, id, target]);
 
-  return [{ dataOnPages, isLoading, isError,loadMore,curPage }, setTargeta, setCurPage,setDataOnPages, setLoadMore, setId];
+  return [{ dataOnPages, target, isLoading, isError,loadMore,curPage }, setTarget, setDataOnPages,setCurPage, setLoadMore, setId];
 };
 
 export default useDataApi;

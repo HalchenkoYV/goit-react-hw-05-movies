@@ -1,26 +1,31 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Route, Routes } from "react-router-dom";
+import { Movies } from './Movies/Movies';
 import { SharedLayout } from "./SharedLayout/SharedLayout";
 import { TrendingMovies } from './TrendingMovies/TrendingMovies';
 import { MovieDetails } from './MovieDetails/MovieDetails';
-import shortid from 'shortid';
+import { Cast } from './Cast/Cast';
+import { Reviews } from './Reviews/Reviews';
+
 
 
 function App (){
-  
 
   useEffect(() => {
-   console.log('i fire once');
+  //  console.log('i fire once');
   });
 
   return (
-    
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route path="/" element={<TrendingMovies/>}/>
-          <Route path=":id" element={<MovieDetails />} />
+          <Route path="/" element={<TrendingMovies />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:id" element={<MovieDetails />} >
+            <Route path="cast" element={<Cast/>} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
       </Route>
     </Routes>
     </>
