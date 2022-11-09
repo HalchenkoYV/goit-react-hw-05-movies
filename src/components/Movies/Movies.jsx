@@ -14,8 +14,6 @@ export const Movies = () => {
   const  handleSubmit = evt => {
     evt.preventDefault();
     setQuery(evt.currentTarget.query.value);
-    // setSearchParams({ query });
-    // evt.currentTarget.reset();
   };
 
   useEffect(() => {

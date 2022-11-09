@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect } from 'react';
+
 import { Route, Routes } from "react-router-dom";
 import { Movies } from './Movies/Movies';
 import { SharedLayout } from "./SharedLayout/SharedLayout";
@@ -8,13 +8,7 @@ import { MovieDetails } from './MovieDetails/MovieDetails';
 import { Cast } from './Cast/Cast';
 import { Reviews } from './Reviews/Reviews';
 
-
-
 function App (){
-
-  useEffect(() => {
-  //  console.log('i fire once');
-  });
 
   return (
     <>

@@ -52,7 +52,7 @@ function fetchPics(text='',id='', page=1, ) {
       return targetRequest;
     };  
   };
-  console.log(text, id, chosenRequest());
+  // console.log(text, id, chosenRequest());
 
   
   return axios.get(`https://api.themoviedb.org/3/${chosenRequest()}`);

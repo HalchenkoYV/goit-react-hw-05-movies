@@ -7,14 +7,13 @@ export const Reviews = () => {
 
     if (dataOnPages.length===0) {
         return;
-    }
+    };
     if (dataOnPages.results.length === 0) {
-                  return <p>There are no reviews</p>
-              }
+        return <p>There are no reviews</p>;
+    };
   return (
       <section>
            {dataOnPages.results.length === 0 ? <p>There are no reviews</p> :
-
                   dataOnPages.results.map(({ author, content, id }) => {
                       return (
                           <li key={id}>
@@ -22,7 +21,6 @@ export const Reviews = () => {
                               <p>Character: {content}</p>
                           </li>)
                   })
-  
             }
     </section>
   );

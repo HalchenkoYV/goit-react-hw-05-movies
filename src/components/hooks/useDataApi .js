@@ -60,9 +60,7 @@ const  useDataApi = (forTarget='',forId='') => {
              setIsLoading(false);
           }, 350);
         };
-
         fetchData();
-        
   }, [curPage, id, target]);
 
   return [{ dataOnPages, target, isLoading, isError,loadMore,curPage }, setTarget, setDataOnPages,setCurPage, setLoadMore, setId];
