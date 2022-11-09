@@ -38,3 +38,7 @@ export const Link = styled(NavLink)`
     background-color: orangered;
   }
 `;
+
+export const JustLink = styled(NavLink)`
+text-decoration:none
+`;

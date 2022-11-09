@@ -54,12 +54,11 @@ const  useDataApi = (forTarget='',forId='') => {
                   page >= total_pages ? setLoadMore(true) : setLoadMore(false);
                   
               };
-              
              }
              catch (error) {setIsError(true);};
  
              setIsLoading(false);
-          }, 1000);
+          }, 350);
         };
 
         fetchData();

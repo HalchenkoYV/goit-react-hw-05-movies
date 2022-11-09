@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import { Container, Header, Logo, Link } from "./SharedLayout.styled";
+import { Container, Header, Logo, Link,JustLink } from "./SharedLayout.styled";
 
 
 export const SharedLayout = () => {
@@ -10,8 +10,8 @@ export const SharedLayout = () => {
         <Logo>
           <span role="img" aria-label="computer icon">
             💻
-          </span>{" "}
-          GoMerch Store
+            </span>{" "}
+            <JustLink to="/" end>MoviesDB</JustLink>
         </Logo>
         <nav>
           <Link to="/" end>
